@@ -14,7 +14,7 @@ from 模型构建屋.线程室 import 执行单个训练
 def 训练():
     torch.manual_seed(123)
     if os.path.isdir(参数.日志的路径):
-        shutil.rmtree(参数.保存的路径)
+        shutil.rmtree(参数.日志的路径)
     os.makedirs(参数.日志的路径)
     if not os.path.isdir(参数.保存的路径):
         os.makedirs(参数.保存的路径)

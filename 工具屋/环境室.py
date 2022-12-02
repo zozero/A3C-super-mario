@@ -88,7 +88,8 @@ class 自定义跳过帧(Wrapper):
 
 
 def 创建训练环境(世界号, 舞台号, 操作模式, 输出的路径=None):
-    环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True, render_mode="human")
+    # 环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True, render_mode="human")
+    环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True)
     if 输出的路径:
         某个监视器 = 监视器类(256, 240, 输出的路径)
     else:

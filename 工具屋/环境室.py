@@ -14,7 +14,7 @@ class 监视器类:
     def __init__(self, 宽度, 高度, 保存的路径):
         # ffmpeg 需要在电脑额外安装这个软件，https://ffmpeg.org/
         self.命令 = ["ffmpeg", "-y", "-f", "rawvideo", "-vcodec", "rawvideo", "-s", "{}X{}".format(宽度, 高度),
-                   "-pix_fmt", "rgb24", "-r", "80", "-i", "-", "-an", "-vcodec", "mpeg4", 保存的路径]
+                     "-pix_fmt", "rgb24", "-r", "80", "-i", "-", "-an", "-vcodec", "mpeg4", 保存的路径]
         try:
             self.管道 = 子进程.Popen(self.命令, stdin=子进程.PIPE, stderr=子进程.PIPE)
         except FileNotFoundError:
@@ -87,9 +87,9 @@ class 自定义跳过帧(Wrapper):
         return 状态列表.astype(np.float32)
 
 
-def 创建训练环境(世界号, 舞台号, 操作模式, 输出的路径=None):
-    # 环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True, render_mode="human")
-    环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True)
+def 创建训练环境(世界号, 舞台号, 操作模式, 输出的路径=None, 渲染模式="rgb_array"):
+    环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True, render_mode=渲染模式)
+    # 环境 = gym.make("SuperMarioBros-{}-{}-v0".format(世界号, 舞台号), apply_api_compatibility=True)
     if 输出的路径:
         某个监视器 = 监视器类(256, 240, 输出的路径)
     else:

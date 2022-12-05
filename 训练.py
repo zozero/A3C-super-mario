@@ -12,7 +12,7 @@ from 模型构建屋.线程室 import 执行单个训练
 
 
 def 训练():
-    # torch.manual_seed(23)
+    torch.cuda.manual_seed(123)
     if os.path.isdir(参数.日志的路径):
         shutil.rmtree(参数.日志的路径)
     os.makedirs(参数.日志的路径)
@@ -31,15 +31,19 @@ def 训练():
         # else:
         #     过去的世界号 = 参数.世界号
         #     过去的舞台号 = 参数.舞台号 - 1
-        # 临时文件路径字符串 = os.path.join(参数.保存的路径, "超级马里奥_{}_{}".format(过去的世界号, 过去的舞台号))
         临时文件路径字符串 = os.path.join(参数.保存的路径, "超级马里奥_{}_{}".format(参数.世界号, 参数.舞台号))
         if os.path.isfile(临时文件路径字符串):
             全局模型.load_state_dict(torch.load(临时文件路径字符串))
+        else:
+            全局模型.初始化权重()
+    else:
+        全局模型.初始化权重()
 
     某个优化器 = 全局自适估计矩(全局模型.parameters(), 学习率=参数.学习率)
 
     执行单个训练(0, 参数, 全局模型, 某个优化器, True)
 
+    # 这个多线程是有问题的，别用
     # 线程列表 = []
     # for 索引 in range(参数.线程数):
     #     if 索引 == 0:

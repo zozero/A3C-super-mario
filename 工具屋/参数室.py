@@ -20,7 +20,7 @@ class 参数类:
         self.日志的路径 = 临时字符串
         self.保存的路径 = "已训练的模型"
         self.视频输出的路径 = "视频"
-        self.是否载入过往的舞台 = False
+        self.是否载入过往的舞台 = True
         self.是否使用图像处理单元 = True
 
 
@@ -30,12 +30,12 @@ class 参数类:
 参数解析器.add_argument("--世界号", type=int, default=1)
 参数解析器.add_argument("--舞台号", type=int, default=1)
 参数解析器.add_argument("--操作模式", type=str, default="复杂")
-参数解析器.add_argument("--学习率", type=float, default=1e-3, help="1e-4等于0.0001")
+参数解析器.add_argument("--学习率", type=float, default=1e-4, help="1e-4等于0.0001")
 参数解析器.add_argument("--伽马", type=float, default=0.9, help="这里表示奖励的折扣因子")
 参数解析器.add_argument("--套", type=float, default=1.0, help="用广义优势估计函数的参数，希腊字母套")
 参数解析器.add_argument("--贝塔", type=float, default=0.01, help="熵的系数")
 参数解析器.add_argument("--区域步数", type=int, default=50)
-参数解析器.add_argument("--全局步数", type=int, default=5e6, help="即5000000，10的6次方")
+参数解析器.add_argument("--全局步数", type=int, default=5e5*5, help="即500000*5，10的5次方")
 参数解析器.add_argument("--线程数", type=int, default=3)
 参数解析器.add_argument("--保存的间隔", type=int, default=500,
                    help="是当前插曲的间隔一个插曲等于5000000/50=100000次循环，这里即为每循环500次执行了500*50步就保存一次。插曲是个代称，和伽马、贝塔类似")
@@ -45,6 +45,6 @@ class 参数类:
 # 使用中文会出现乱码，可以参考 https://blog.csdn.net/wry15082983136/article/details/126229608 来解决
 参数解析器.add_argument("--保存的路径", type=str, default="已训练的模型")
 参数解析器.add_argument("--视频输出的路径", type=str, default="视频")
-参数解析器.add_argument("--是否载入过往的舞台", type=bool, default=True, help="载入已训练的模型")
+参数解析器.add_argument("--是否载入过往的舞台", type=bool, default=False, help="载入已训练的模型")
 参数解析器.add_argument("--是否使用图像处理单元", type=bool, default=True)
 参数 = 参数解析器.parse_args()
